@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: aipay
+  profiles:
+    active: localtest
+    
+  
+  
+---
+spring:
+  profiles: localtest
+  
+server:
+  port: 9001
+ 
+ #支付宝支付
+alipay:
+  app_id: 2016091900544135
+  #商户私钥，您的PKCS8格式RSA2私钥
+  merchant_private_key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCuxATrIv4IAB+Gslrikub6z3Hj3XBTtEhAF/QV764H72z5migCU1PRV9LIE1g2bl4Ownt99zDQN3seAGMPs/ZpgJ2ZXo5W3qEas8rXFzswQ1KRHq82sCn04hWIOZEX4MwrYxtgiBKCwPLbOnxiiwv6tfkqG7wiB7czSqBOagG6s6eAIYiLFVr2UN5bI4M2ZOYI8xT6PKPAx1jvlJr9HGsbJNmtIfoh+pJ0nIMzGz+dQyfZ4R5M4ktk8mZt44qgi3L1uvRUrz4EV7RrLT5H5W9fAOB4KpQDk0/ohBM3BRH1kPC4gGRxBCUE0Aw+8hswTzIUrR1WsXl0qjbqs/F16jI7AgMBAAECggEAQNOpV2d1f5Y8G4TRPbZsQ6DriDC91+7J1iyMeA6eKYdgjv3l1Wb/cmn3YAv87sPl0+fEUyd8TeAmpSxTkqGYx+3Th+6RMhwG+payqTKO3Ao8+GO/brPN/G5Yul1QOuFCGt36a8ZNx363FycMuKkHWoph0ILVOHJQPJB0AmJEHfKlPlSatw+XcJ7VdyHqJbIb6mbEMhOI0BmcpcNrZlB2X+thGY4Z+Vz07HZIxcsv0ry7kIbZKGlb3pn/LZ4FUiNiabtl63G2SN1PoNKAuN9U1bCywroGcXt8aTnLsWy+LDVJBPMh/M2ZzSvD+bwr+WFTxRmlJoEdHisYeMpK9TP4wQKBgQDXhc7J4qxYEA4acmwGxHSpuwisf8YOgBR4005DlLXtw31kSfEUjVdqDUIvvQl3dmXBIKWQGCx/SLsOE/H+JzZMUCQEQXqDlt1YVPIHK1R0ZXGC0FYAbQvoneNtKQw9TFpXwgkqhieyR7NtH8aIOUEFj6+boAuXDTu2/SkTDQfOywKBgQDPlqRIdyUFK/3qPa882BU+jXNM269a2oaji3TlTPAYyrGJQm2UT4vnND7T+fSoefeDmzys0NUB1oaZ4IicisORy4B9eL8PyHIpZBKM/CxqcQZLUTfTeNqztyd5LmF3qlXRh+nU+KkdjwjFDvOTPlruIaZ6knY/axKv0o4NO/jMUQKBgQCYSJjDt6F1G+sLLtw7r+aK43gOgr4MEt3kPdIoGFSwKphYG5L3paMlcTbaCmU8/vCJFKtHdH1EdryNBvTPUx+frmS0iRurDRdbSbI19JzZHbCl8NVDuclXVPCUehOG4INZTOYzINW9t8IFEhWyvVm/Nzaq7NwjoBsYgirapjNlHwKBgQC1ytXKBFUuR01RQn3hSdao9hUAPO8/IFqChNF1McCd5Xw+mSb/l/4MFuvilWZV2KIS5fLn4OZ5epZb0Y+xj7AfUNkQiJrBxqd7agD46Ko4+QwrD1BVaOQWOJJgBGck9c279kunz6/CjA2BDUvwKc5V9rAlbXgSp8EwqrLuEhQbUQKBgGB2axzRmljN1baQT9YlSKGa9LPT9XdMzbICp6ijQ86Wu1R2BPYvGf3koxwbZLcyD9Covwm/q0+CLZHpS28CwyWRl5OhIc+OT+JNzfbGSbXRQ5bdw129D3tuIg+AxOrE+fmA1BYA8pVcimWZhsA8duVLtHLZLxR5Z34oRB9KPrAQ
+  #支付宝公钥
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArsQE6yL+CAAfhrJa4pLm+s9x491wU7RIQBf0Fe+uB+9s+ZooAlNT0VfSyBNYNm5eDsJ7ffcw0Dd7HgBjD7P2aYCdmV6OVt6hGrPK1xc7MENSkR6vNrAp9OIViDmRF+DMK2MbYIgSgsDy2zp8YosL+rX5Khu8Ige3M0qgTmoBurOngCGIixVa9lDeWyODNmTmCPMU+jyjwMdY75Sa/RxrGyTZrSH6IfqSdJyDMxs/nUMn2eEeTOJLZPJmbeOKoIty9br0VK8+BFe0ay0+R+VvXwDgeCqUA5NP6IQTNwUR9ZDwuIBkcQQlBNAMPvIbME8yFK0dVrF5dKo26rPxdeoyOwIDAQAB
+  #服务器异步通知页面路径处理逻辑
+  notify_url: http://localhost:9001/rest/alipay/pay
+  #页面跳转同步通知页面路径返回商户页面
+  return_url: http://localhost:9001/rest/alipay/payNotify
+  #签名方式
+  sign_type: RSA2
+  #字符编码格式
+  charset: utf-8
+  #支付宝网关
+  gatewayUrl: https://openapi.alipaydev.com/gateway.do
+  #付款方
+  payer_show_name: 测试买家 
+  
+  
+---
+spring:
+  profiles: test
+  
+server:
+  port: 9002
