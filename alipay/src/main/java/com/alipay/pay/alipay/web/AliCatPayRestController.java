@@ -9,7 +9,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.assertj.core.util.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +41,7 @@ public class AliCatPayRestController  {
         view.addObject("data", aliCatPayManager.pcPay(tradeNo, payAmount, goodsName, goodsDesc));
     	return view;
     }
+
 
     @RequestMapping("/alipay/appPrePay")
     public RestObjectResult<String> appPrePay(@RequestParam("tradeNo") String tradeNo,
